@@ -9,7 +9,12 @@
 
 ## Scenariul
 
-Modelezi o platformă de plăți online pentru o bancă, cu suport pentru mai multe tipuri de utilizatori (persoane fizice și juridice) și capabilități diferite. Unii utilizatori pot plăti doar prin cont bancar, alții pot primi și confirmare prin SMS. Pentru fiecare client care are capabilitate SMS, se vor păstra și înregistra mesajele trimise, mapate la acel client. Trebuie tratate și cazurile în care un client nu are număr de telefon sau se încearcă trimiterea SMS către o entitate fără această capabilitate.
+Modelezi o platformă de plăți online pentru o bancă, cu suport pentru mai multe tipuri de utilizatori
+(persoane fizice și juridice) și capabilități diferite. 
+Unii utilizatori pot plăti doar prin cont bancar, alții pot primi și confirmare prin SMS. 
+Pentru fiecare client care are capabilitate SMS, se vor păstra și înregistra mesajele trimise,
+mapate la acel client. Trebuie tratate și cazurile în care un client nu are număr de telefon 
+sau se încearcă trimiterea SMS către o entitate fără această capabilitate.
 
 ---
 
