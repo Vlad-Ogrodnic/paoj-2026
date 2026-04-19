@@ -7,4 +7,3 @@ public class Checker {
         IOTest.runFlat("src/com/pao/laboratory07/exercise2/tests", Main::main);
     }
 }
-
