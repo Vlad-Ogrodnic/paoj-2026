@@ -20,6 +20,6 @@ Am ales ca tema pentru proiect platforma e-learning
 3. `Cursant` (mosteneste Utilizator)
 4. `Curs` 
 5. `Modul` (o sectiune dintr-un curs)
-6. `Material` (poate fi video, document, etc.)
+6. `Material` (poate fi video, pdf sau quiz)
 7. `Inscriere` (clasa imutabila care asociaza un cursant cu un curs)
 8. `Scor` (reprezinta nota obtinuta de un cursant la o evaluare)
