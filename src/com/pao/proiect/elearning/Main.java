@@ -3,8 +3,10 @@ package com.pao.proiect.elearning;
 import com.pao.proiect.elearning.exception.AccesInterzisException;
 import com.pao.proiect.elearning.exception.EntitateNegasitaException;
 import com.pao.proiect.elearning.model.*;
+import com.pao.proiect.elearning.service.AuditService;
 import com.pao.proiect.elearning.service.CursService;
 import com.pao.proiect.elearning.service.UtilizatorService;
+import com.pao.proiect.elearning.util.DatabaseConnection;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -16,8 +18,10 @@ public class Main {
     private static final Scanner scanner = new Scanner(System.in).useLocale(Locale.US);
     private static final UtilizatorService userService = UtilizatorService.getInstance();
     private static final CursService cursService = CursService.getInstance();
+    private static final AuditService auditService = AuditService.getInstance();
 
     public static void main(String[] args) {
+        DatabaseConnection.getInstance().initializeSchema();
         incarcaDateInitiale();
 
         boolean ruleaza = true;
@@ -90,6 +94,7 @@ public class Main {
     }
 
     private static void adaugaUtilizatorNou() {
+        auditService.logActiune("adauga_utilizator");
         System.out.println("Tip utilizator (1-Profesor, 2-Cursant): ");
         int tip = citesteIntreg("");
         int id = citesteIntreg("ID: ");
@@ -110,6 +115,7 @@ public class Main {
     }
 
     private static void creeazaCursNou() {
+        auditService.logActiune("creeaza_curs");
         int id = citesteIntreg("ID Curs: ");
         System.out.print("Titlu Curs: ");
         String titlu = scanner.nextLine();
@@ -120,6 +126,7 @@ public class Main {
     }
 
     private static void inscrieCursant() throws EntitateNegasitaException {
+        auditService.logActiune("inscrie_cursant");
         afiseazaCursuriDisponibile();
         int idCurs = citesteIdCursExistent("ID Curs: ");
         afiseazaUtilizatoriDisponibili();
@@ -129,6 +136,7 @@ public class Main {
     }
 
     private static void adaugaModul() throws EntitateNegasitaException {
+        auditService.logActiune("adauga_modul");
         afiseazaCursuriDisponibile();
         int idCurs = citesteIdCursExistent("ID Curs: ");
         int idModul = citesteIntreg("ID Noul Modul: ");
@@ -139,6 +147,7 @@ public class Main {
     }
 
     private static void adaugaMaterial() throws EntitateNegasitaException {
+        auditService.logActiune("adauga_material");
         afiseazaCursuriDisponibile();
         int idCurs = citesteIdCursExistent("ID Curs: ");
         afiseazaModuleDisponibile(idCurs);
@@ -162,6 +171,7 @@ public class Main {
     }
 
     private static void inregistreazaNota() {
+        auditService.logActiune("inregistreaza_nota");
         afiseazaCursantiDisponibili();
         int idCursant = citesteIdCursantExistent("ID Cursant: ");
         afiseazaToateQuizurile();
@@ -174,18 +184,20 @@ public class Main {
     }
 
     private static void afiseazaCursurileProfesorului() {
+        auditService.logActiune("afiseaza_cursuri_profesor");
         afiseazaProfesoriDisponibili();
         int idProf = citesteIdProfesorExistent("ID Profesor: ");
-        List<Curs> cursuri = cursService.getCursuriProfesor(idProf);
+        List<CursCuProfesor> cursuri = cursService.getCursuriProfesorCuDetalii(idProf);
         if (cursuri.isEmpty()) {
             System.out.println("Acest profesor nu are cursuri.");
         } else {
             System.out.println("Cursurile profesorului:");
-            for (Curs c : cursuri) System.out.println(" - " + c.getTitlu());
+            for (CursCuProfesor c : cursuri) System.out.println(" - " + c);
         }
     }
 
     private static void afiseazaCursantiiInscrisi() throws EntitateNegasitaException {
+        auditService.logActiune("afiseaza_cursanti_inscrisi");
         afiseazaCursuriDisponibile();
         int idCurs = citesteIdCursExistent("ID Curs: ");
         afiseazaProfesoriDisponibili();
@@ -209,6 +221,7 @@ public class Main {
     }
 
     private static void calculeazaMedia() throws EntitateNegasitaException {
+        auditService.logActiune("calculeaza_media");
         afiseazaCursuriDisponibile();
         int idCurs = citesteIdCursExistent("ID Curs: ");
         afiseazaUtilizatoriDisponibili();
@@ -218,6 +231,7 @@ public class Main {
     }
 
     private static void stergeCurs() {
+        auditService.logActiune("sterge_curs");
         afiseazaCursuriDisponibile();
         int idCurs = citesteIdCursExistent("ID Curs de sters: ");
         cursService.stergeCurs(idCurs);

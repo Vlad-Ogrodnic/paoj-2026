@@ -6,6 +6,8 @@ temporarily_curs
 # output directories of .class
 out/
 output/
+paoj_proiect.db
+audit.csv
 
 # binary files required in the tests directory
 *.bin

@@ -8,9 +8,13 @@ public final class Inscriere {
     private final LocalDateTime dataInscrierii;
 
     public Inscriere(int cursId, int cursantId) {
+        this(cursId, cursantId, LocalDateTime.now());
+    }
+
+    public Inscriere(int cursId, int cursantId, LocalDateTime dataInscrierii) {
         this.cursId = cursId;
         this.cursantId = cursantId;
-        this.dataInscrierii = LocalDateTime.now();
+        this.dataInscrierii = dataInscrierii;
     }
 
     public int getCursId() {
